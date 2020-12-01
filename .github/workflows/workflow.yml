@@ -31,5 +31,6 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: Update-infrastructure
+          ref: master
           repo: mattedamo/thesis-microservices-app-backend-first-attempt-infrastructure
           token: ${{ secrets.WORKFLOW_DISPATCH }}
