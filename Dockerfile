@@ -1,4 +1,4 @@
-FROM openjdk:11 AS build
+FROM openjdk:8-jdk-alpine AS build
 WORKDIR /workspace/app
 
 COPY mvnw .
@@ -6,12 +6,11 @@ COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
 
-RUN ls
 RUN ./mvnw install -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 
-FROM openjdk:11
+FROM openjdk:8-jdk-alpine
 VOLUME /tmp
 ARG DEPENDENCY=/workspace/app/target/dependency
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
