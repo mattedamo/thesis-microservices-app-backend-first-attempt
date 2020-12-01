@@ -21,3 +21,13 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: ${{ secrets.DOCKER_USERNAME }}/first-attempt-backend
         tags: ${{ github.sha }}, latest
+   
+  trigger-workflow:
+    name: Trigger workflow
+    steps:
+      - name: Trigger infrastructure repo workflow
+        uses: benc-uk/workflow_dispatch@v1
+        with:
+          workflow: Update-infrastructure
+          repo: mattedamo/thesis-microservices-app-backend-first-attempt-infrastructure
+          token: ${{ secrets.WORKFLOW_DISPATCH }}
