@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger infrastructure repo workflow
-        uses: benc-uk/workflow_dispatch@v1
+        uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: Update-infrastructure
           repo: mattedamo/thesis-microservices-app-backend-first-attempt-infrastructure
