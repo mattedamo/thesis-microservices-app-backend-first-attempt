@@ -33,6 +33,6 @@ jobs:
         with:
           workflow: Update-infrastructure
           ref: master
-          inputs: '{ "github_sha" : "'"${{github.sha}}"'" }'
+          inputs: '{ "github_sha" : "${{github.sha}}" }'
           repo: mattedamo/thesis-microservices-app-backend-first-attempt-infrastructure
           token: ${{ secrets.WORKFLOW_DISPATCH }}
