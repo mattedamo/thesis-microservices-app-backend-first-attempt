@@ -24,6 +24,7 @@ jobs:
    
   trigger-workflow:
     name: Trigger workflow
+    runs-on: ubuntu-latest
     steps:
       - name: Trigger infrastructure repo workflow
         uses: benc-uk/workflow_dispatch@v1
