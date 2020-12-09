@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  mariadb:
+    image: "mariadb:10.5"
+    container_name: mariadb
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=thesisAppMariadb
+  backend:
+    image: prova-backend
+    container_name: backend
+    ports:
+      - 8080:8080
+    depends_on:
+      - mariadb
+    deploy:
+      restart_policy:
+        condition: on-failure
