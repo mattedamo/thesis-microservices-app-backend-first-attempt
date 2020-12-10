@@ -15,4 +15,4 @@ FROM openjdk:8-jdk-alpine
 ARG JAR_FILE=/workspace/app/target/*.jar
 COPY --from=build ${JAR_FILE} app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar","/app.jar"]
+ENTRYPOINT ["java","-Dspring.profiles.active=prod", "-jar","/app.jar"]
