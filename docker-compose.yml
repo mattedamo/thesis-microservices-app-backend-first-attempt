@@ -10,7 +10,7 @@ services:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=thesisAppMariadb
   backend:
-    image: prova-backend
+    image: mattedamo26/first-attempt-backend
     container_name: backend
     ports:
       - 8080:8080
@@ -19,3 +19,15 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
+  frontend:
+    image: mattedamo26/first-attempt-frontend
+    container_name: frontend
+    ports:
+      - 4200:80
+    depends_on:
+      - mariadb
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+
