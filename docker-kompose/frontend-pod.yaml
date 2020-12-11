@@ -10,7 +10,7 @@ spec:
   - image: mattedamo26/first-attempt-frontend
     name: frontend
     ports:
-    - containerPort: 80
+    - containerPort: 4200
     resources: {}
   restartPolicy: OnFailure
 status: {}
