@@ -1,6 +1,6 @@
 package thesis.microservices.app.backend.services;
 
-import dtos.UserDTO;
+import thesis.microservices.app.backend.dtos.UserDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

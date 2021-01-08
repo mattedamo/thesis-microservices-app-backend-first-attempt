@@ -1,6 +1,6 @@
 package thesis.microservices.app.backend.services;
 
-import dtos.UserDTO;
+import thesis.microservices.app.backend.dtos.UserDTO;
 
 import java.util.List;
 

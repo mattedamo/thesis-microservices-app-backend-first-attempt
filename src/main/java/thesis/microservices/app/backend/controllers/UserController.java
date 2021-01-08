@@ -1,8 +1,7 @@
 package thesis.microservices.app.backend.controllers;
 
-import dtos.UserDTO;
+import thesis.microservices.app.backend.dtos.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import thesis.microservices.app.backend.services.UserService;
 
