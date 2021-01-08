@@ -1,20 +1,22 @@
-name: WorkFlow
+name: WorkFlow-development
 
 on:
   push:
-    branches: [ master ]
+    branches: 
+      - 'feature/*'
 
 jobs:
-  build:
-    name: Build image
+  setup:
+    name: Setup
     runs-on: ubuntu-latest
 
     steps:
+    - name: Set environment variables
+      uses: allenevans/set-env@v2.0.0
+      with:
+          NS: 'dev'
 
-    - name: checkout
-      uses: actions/checkout@v2
-
-    - name: Check existence file input
+    - name: Check existence file.yaml
       id: check_file
       uses: andstor/file-existence-action@v1
       with:
@@ -27,7 +29,22 @@ jobs:
     - name: File exists
       if: steps.check_file.outputs.files_exists == 'true'
       run: echo "exists!"
- 
+    
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with: 
+        python-version: "3.x"
+    - run: pip install PyYAML
+      name: Install py dependencies
+
+    - run: python set-ns.py
+      name: run set-namespace script 
+  
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
     - name: Build and push Docker image
       uses: docker/build-push-action@v1.1.0
       with:
@@ -35,6 +52,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: ${{ secrets.DOCKER_USERNAME }}/first-attempt-backend
         tags: ${{ github.sha }}, latest
+
 
   trigger-workflow:
     name: Trigger workflow
@@ -46,6 +64,6 @@ jobs:
         with:
           workflow: Update-infrastructure-backend
           ref: master
-          inputs: '{"sha-tag" : "${{ github.sha }}"}'
+          inputs: '{"sha-tag" : "${{ github.sha }}", "code-branch" : "${{ GITHUB_REF##*/ }}","overlays-dir" : "dev" }'
           repo: mattedamo/thesis-microservices-app-backend-first-attempt-infrastructure
           token: ${{ secrets.WORKFLOW_DISPATCH }}
