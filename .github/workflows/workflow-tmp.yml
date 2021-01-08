@@ -2,8 +2,7 @@ name: WorkFlow-production
 
 on:
   push:
-    branches: 
-      - 'setting-up'
+    branches: [master, setting-up]
 
 jobs:
   setup:
